@@ -1,0 +1,179 @@
+================================================================================
+WHERE NEEDS OVERLAP — REVERSE ENGINEERING GUIDE
+================================================================================
+Purpose: Teach yourself how this portfolio project works by walking backward
+from the live app to the raw data. Read this with the code open side-by-side.
+
+Audience: You (career-changer). Not for hiring managers — they get the README.
+
+
+--------------------------------------------------------------------------------
+1. THE ONE IDEA (start here when lost)
+--------------------------------------------------------------------------------
+Question the whole app answers:
+
+  "In these eight countries, where do acute hunger, hosted displacement,
+   and child mortality risk show up together?"
+
+If a feature does not help answer that question, it does not belong.
+That single filter is how you stop INFJ overbuilding.
+
+
+--------------------------------------------------------------------------------
+2. DATA FLOW (follow arrows with your finger)
+--------------------------------------------------------------------------------
+
+  HDX (IPC CSV) ──────┐
+  UNHCR API/JSON ─────┼──► data/raw/* ──► src/clean.py ──► data/processed/
+  WHO GHO API ────────┘                          │              │
+                                                 │              ├─ analysis_table.csv
+                                                 │              └─ metadata.json
+                                                 ▼
+                                          src/insights.py  (dual-pressure narrative)
+                                                 │
+                              src/charts.py ◄── app.py ◄── src/i18n.py (EN/FR)
+                                   │
+                                   ▼
+                     Map · Overlap(+insight) · Country(+trends) · Methods · Sources
+
+
+Mental model:
+  FETCH    = "get files onto disk"
+  CLEAN    = "make one trustworthy table + provenance metadata"
+  INSIGHT  = "turn the table into a sentence an IM officer can use"
+  CHART    = "draw without reinventing metrics"
+  APP      = "thin UI that tells the story"
+
+
+--------------------------------------------------------------------------------
+3. FILE MAP — WHAT EACH FILE OWNS
+--------------------------------------------------------------------------------
+
+src/config.py
+  - Locked geography, WHY sentence, API constants
+  - Reverse-engineer tip: change FOCUS_ISO3 and re-run clean — watch KPIs move
+
+src/fetch_hdx.py / fetch_who.py / fetch_unhcr.py
+  - See earlier notes; UNHCR MUST pass coa + cf_type=ISO or you get world totals
+
+src/clean.py
+  - IPC: Validity period == current, Phase == 3+, Percentage is 0–1 share
+  - Left-join onto focus-country skeleton (missing IPC stays blank on purpose)
+  - Calls metadata_io.write_metadata()
+
+src/insights.py
+  - Computes dual-pressure countries (above median IPC % AND above median displacement)
+  - Builds the Overlap-tab "What this shows" narrative from live numbers
+  - Tip: break the medians intentionally in a notebook to see headline change
+
+src/i18n.py
+  - Single source of truth for EN/FR: UI copy, captions, methods/sources markdown,
+    chart label bundles (chart_labels), localized country names (country_name)
+  - insights.py and charts.py take lang= so switching Français rewrites the whole page
+
+src/charts.py
+  - map_ipc, scatter_overlap, country_drilldown, country_trends
+  - Trends read history CSVs produced by fetch_unhcr / fetch_who
+
+src/metadata_io.py
+  - Writes access_date + source URLs into metadata.json
+
+app.py
+  - Definition banner beside KPIs (trust signal)
+  - Overlap insight callout + "Monday IM" prompt
+  - Gap warnings when IPC is missing
+  - Methods & glossary tab
+  - DEMO_VIDEO_URL placeholder for your Loom
+
+docs/methods.md     — audit trail for metrics
+docs/deploy.md      — Streamlit Cloud + demo checklist
+docs/limitations.md — intellectual honesty
+docs/talking_points.md — 90-second script
+README.md           — case study employers actually read
+
+
+--------------------------------------------------------------------------------
+4. THE ANALYSIS TABLE (decode the product)
+--------------------------------------------------------------------------------
+Open data/processed/analysis_table.csv after running clean. Expected idea:
+
+  iso3, country
+  phase3plus_people, phase3plus_pct     ← IPC hunger severity
+  displaced, displacement_year          ← UNHCR hosted displacement
+  u5mr, u5mr_year                       ← WHO child survival context
+  compound_score                        ← rough "overlap" ranking aid
+
+Join key: ISO3. Never join on English country names.
+
+
+--------------------------------------------------------------------------------
+5. HOW TO REVERSE ENGINEER IN ONE AFTERNOON
+--------------------------------------------------------------------------------
+Step A — Run: python -m src.run_pipeline && streamlit run app.py
+
+Step B — Break things on purpose:
+  1. Delete analysis_table.csv → empty state
+  2. Blank ETH phase3plus_pct in the CSV → gap warning appears
+  3. Read Overlap insight; change medians by editing two displaced values →
+     headline countries shift. Conclusion: narrative is data-driven, not hard-coded
+
+Step C — Trace one number (ETH Phase 3+%):
+  analysis_table → raw IPC CSV (Phase 3+, current) → confirm clean did not invent it
+
+Step D — Explain aloud (no notes):
+  "I joined three sources on ISO3, locked displacement as hosted REF+ASY+OOC,
+   and designed the UI around where needs compound — with EN/FR glossary for Geneva."
+
+
+--------------------------------------------------------------------------------
+6. WHY THE VIEWS EXIST (product reverse-engineering)
+--------------------------------------------------------------------------------
+Story ..... THE product insight first (fewest clicks to value)
+Map ....... severity backdrop (+ missing-data note)
+Country ... snapshot + trends for one place
+About ..... methods + glossary + sources + ethics (progressive disclosure)
+
+UI helpers: src/styles.py (CSS motion/spacing), src/formatters.py (number display)
+Navigation: horizontal radio (Story | Map | One country | Behind the numbers)
+
+
+--------------------------------------------------------------------------------
+7. INFJ OVERTHINK TRAPS → CODE COUNTERMEASURES
+--------------------------------------------------------------------------------
+Trap: "Maybe I should add climate / FTS first"
+Fix:  docs/backlog.md only; deploy before new sources (docs/deploy.md)
+
+Trap: "Captions must be perfect"
+Fix:  insights.py generates the finding; polish only after a human sees the URL
+
+Trap: "Demo video before the story is ready"
+Fix:  Record only after Overlap insight matches README case study
+
+
+--------------------------------------------------------------------------------
+8. EMPLOYER-FAVORABILITY LAYER (what we added for hiring managers)
+--------------------------------------------------------------------------------
+[x] Non-obvious overlap insight (not generic chart caption)
+[x] Displacement definition next to KPIs
+[x] Missing IPC explained as coverage gap
+[x] Case-study README (problem → method → finding → limitation)
+[x] Methods note + EN/FR glossary
+[x] Country trends from history extracts
+[x] Pinned requirements + metadata access_date
+[ ] Live Streamlit URL + 90-sec Loom  ← your remaining actions (docs/deploy.md)
+
+
+--------------------------------------------------------------------------------
+9. SELF-CHECK BEFORE YOU CALL IT "DONE"
+--------------------------------------------------------------------------------
+[ ] Live URL opens without error
+[ ] You can state the displacement definition without looking
+[ ] Overlap tab names real dual-pressure countries
+[ ] Limitations page exists and you believe it
+[ ] README finding matches the live insight box
+[ ] You recorded a 90-second walkthrough
+
+
+================================================================================
+End of reverse-engineering guide. When stuck, re-read section 1, then section 2.
+================================================================================

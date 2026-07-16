@@ -1,0 +1,29 @@
+{
+  "project": "where-needs-overlap",
+  "access_date": "2026-07-14",
+  "sources": [
+    {
+      "name": "IPC Acute Food Insecurity (national long)",
+      "provider": "IPC via HDX",
+      "dataset_id": "global-acute-food-insecurity-country-data",
+      "url": "https://data.humdata.org/dataset/global-acute-food-insecurity-country-data",
+      "license_note": "Check HDX dataset page for current license terms."
+    },
+    {
+      "name": "UNHCR Population Statistics API",
+      "provider": "UNHCR",
+      "url": "https://api.unhcr.org/population/v1/population/",
+      "definition": "Hosted REF + asylum-seekers + others of concern (coa, ISO)",
+      "license_note": "UNHCR public API / refugee statistics terms."
+    },
+    {
+      "name": "WHO GHO under-5 mortality",
+      "provider": "WHO",
+      "indicator": "MDG_0000000001",
+      "url": "https://ghoapi.azureedge.net/api/MDG_0000000001",
+      "license_note": "WHO GHO public data; attribute WHO."
+    }
+  ],
+  "join_key": "ISO3",
+  "not_for_operational_use": true
+}
