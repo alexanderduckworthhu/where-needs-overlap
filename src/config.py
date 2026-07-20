@@ -1,7 +1,7 @@
 """
 Locked project scope and shared constants.
 
-Edit geography only as a deliberate product decision — not mid-build.
+Edit geography only as a deliberate product decision, not mid-build.
 """
 
 from __future__ import annotations
@@ -12,7 +12,7 @@ PROJECT_ROOT: Path = Path(__file__).resolve().parents[1]
 RAW_DIR: Path = PROJECT_ROOT / "data" / "raw"
 PROCESSED_DIR: Path = PROJECT_ROOT / "data" / "processed"
 
-# Horn of Africa + Sahel — co-occurring crisis contexts for UNICEF / UNHCR / OCHA
+# Horn of Africa + Sahel, co-occurring crisis contexts for UNICEF / UNHCR / OCHA
 FOCUS_ISO3: list[str] = ["BFA", "TCD", "ETH", "MLI", "NER", "SOM", "SSD", "SDN"]
 
 # English names for the analysis table; UI strings live in src.i18n

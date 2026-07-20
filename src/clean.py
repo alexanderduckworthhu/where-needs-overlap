@@ -166,7 +166,7 @@ def build_analysis_table(
         .merge(who, on="iso3", how="left")
     )
 
-    # Illustrative ranking only — not an official severity index
+    # Illustrative ranking only, not an official severity index
     for col in ["phase3plus_pct", "displaced", "u5mr"]:
         if col in merged.columns:
             merged[f"{col}_z"] = (

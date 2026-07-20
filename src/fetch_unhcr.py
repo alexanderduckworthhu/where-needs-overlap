@@ -43,7 +43,7 @@ def fetch_unhcr(
     Download hosted REF+ASY+OOC for focus countries of asylum.
 
     Returns path to unhcr_displacement_focus.csv.
-    Requires `coa` + `cf_type=ISO` — omitting `coa` returns a world aggregate.
+    Requires `coa` + `cf_type=ISO`, omitting `coa` returns a world aggregate.
     """
     output_dir = output_dir or RAW_DIR
     output_dir.mkdir(parents=True, exist_ok=True)

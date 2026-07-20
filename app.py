@@ -1,5 +1,5 @@
 """
-Where Needs Overlap — Streamlit entry point.
+Where Needs Overlap: Streamlit entry point.
 
 Story-first navigation: insight first, optional Map / Country / About afterward.
 """
@@ -213,7 +213,7 @@ else:
     st.markdown(t(lang, "methods_md"))
     st.markdown(t(lang, "glossary_heading"))
     for term, meaning in GLOSSARY[lang]:
-        st.markdown(f"- **{term}** — {meaning}")
+        st.markdown(f"- **{term}**, {meaning}")
     st.markdown(t(lang, "sources_md"))
     if meta.get("access_date"):
         st.markdown(f"**{t(lang, 'access_date_label')}:** {meta['access_date']}")

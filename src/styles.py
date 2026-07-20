@@ -1,4 +1,4 @@
-"""Design tokens and Streamlit chrome — cool slate + deep teal (not cream/serif/terracotta)."""
+"""Design tokens and Streamlit chrome, cool slate + deep teal (not cream/serif/terracotta)."""
 
 from __future__ import annotations
 

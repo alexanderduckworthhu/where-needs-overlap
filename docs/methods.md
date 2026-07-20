@@ -8,12 +8,12 @@ This note exists so a hiring manager (or future you) can audit the numbers witho
    `global-acute-food-insecurity-country-data` via `src/fetch_hdx.py`.
 2. Filter to focus ISO3 codes (`src/config.py`).
 3. Prefer rows where `Validity period == current` (exclude projections for the main KPIs).
-4. Keep rows where `Phase == 3+` (Crisis or worse — the operational threshold).
+4. Keep rows where `Phase == 3+` (Crisis or worse, the operational threshold).
 5. `Number` → `phase3plus_people`.
 6. `Percentage` in the HDX extract is a **0–1 share**; multiply by 100 for chart percent labels.
 
 If a focus country has no current `3+` row, the analysis table leaves IPC fields blank.
-**Blank ≠ zero hunger** — it means this national extract did not provide a current Phase 3+ estimate.
+**Blank ≠ zero hunger**, it means this national extract did not provide a current Phase 3+ estimate.
 
 ## Displacement (UNHCR)
 
@@ -21,7 +21,7 @@ Endpoint: `https://api.unhcr.org/population/v1/population/`
 
 Required query pattern:
 
-- `coa=<ISO3 list>` — country of asylum (hosted)
+- `coa=<ISO3 list>`, country of asylum (hosted)
 - `cf_type=ISO`
 - `yearFrom` / `yearTo`
 

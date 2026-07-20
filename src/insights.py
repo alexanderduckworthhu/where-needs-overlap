@@ -1,4 +1,4 @@
-"""Derived narrative for the Story view — dual-pressure countries and coverage gaps."""
+"""Derived narrative for the Story view, dual-pressure countries and coverage gaps."""
 
 from __future__ import annotations
 

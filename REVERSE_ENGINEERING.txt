@@ -1,10 +1,10 @@
 ================================================================================
-WHERE NEEDS OVERLAP — REVERSE ENGINEERING GUIDE
+WHERE NEEDS OVERLAP: REVERSE ENGINEERING GUIDE
 ================================================================================
 Purpose: Teach yourself how this portfolio project works by walking backward
 from the live app to the raw data. Read this with the code open side-by-side.
 
-Audience: You (career-changer). Not for hiring managers — they get the README.
+Audience: You (career-changer). Not for hiring managers, they get the README.
 
 
 --------------------------------------------------------------------------------
@@ -46,12 +46,12 @@ Mental model:
 
 
 --------------------------------------------------------------------------------
-3. FILE MAP — WHAT EACH FILE OWNS
+3. FILE MAP. WHAT EACH FILE OWNS
 --------------------------------------------------------------------------------
 
 src/config.py
   - Locked geography, WHY sentence, API constants
-  - Reverse-engineer tip: change FOCUS_ISO3 and re-run clean — watch KPIs move
+  - Reverse-engineer tip: change FOCUS_ISO3 and re-run clean, watch KPIs move
 
 src/fetch_hdx.py / fetch_who.py / fetch_unhcr.py
   - See earlier notes; UNHCR MUST pass coa + cf_type=ISO or you get world totals
@@ -85,11 +85,11 @@ app.py
   - Methods & glossary tab
   - DEMO_VIDEO_URL placeholder for your Loom
 
-docs/methods.md     — audit trail for metrics
-docs/deploy.md      — Streamlit Cloud + demo checklist
-docs/limitations.md — intellectual honesty
-docs/talking_points.md — 90-second script
-README.md           — case study employers actually read
+docs/methods.md    , audit trail for metrics
+docs/deploy.md     . Streamlit Cloud + demo checklist
+docs/limitations.md, intellectual honesty
+docs/talking_points.md, 90-second script
+README.md          , case study employers actually read
 
 
 --------------------------------------------------------------------------------
@@ -109,20 +109,20 @@ Join key: ISO3. Never join on English country names.
 --------------------------------------------------------------------------------
 5. HOW TO REVERSE ENGINEER IN ONE AFTERNOON
 --------------------------------------------------------------------------------
-Step A — Run: python -m src.run_pipeline && streamlit run app.py
+Step A. Run: python -m src.run_pipeline && streamlit run app.py
 
-Step B — Break things on purpose:
+Step B. Break things on purpose:
   1. Delete analysis_table.csv → empty state
   2. Blank ETH phase3plus_pct in the CSV → gap warning appears
   3. Read Overlap insight; change medians by editing two displaced values →
      headline countries shift. Conclusion: narrative is data-driven, not hard-coded
 
-Step C — Trace one number (ETH Phase 3+%):
+Step C. Trace one number (ETH Phase 3+%):
   analysis_table → raw IPC CSV (Phase 3+, current) → confirm clean did not invent it
 
-Step D — Explain aloud (no notes):
+Step D. Explain aloud (no notes):
   "I joined three sources on ISO3, locked displacement as hosted REF+ASY+OOC,
-   and designed the UI around where needs compound — with EN/FR glossary for Geneva."
+   and designed the UI around where needs compound, with EN/FR glossary for Geneva."
 
 
 --------------------------------------------------------------------------------
