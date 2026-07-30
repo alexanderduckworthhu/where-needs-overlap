@@ -200,24 +200,32 @@ def inject_styles() -> None:
 
 
 def set_page_direction(lang: str) -> None:
-    """Flip the page to RTL for Arabic, LTR otherwise. Returns None.
+    """Flip main chrome to RTL for Arabic, LTR otherwise. Returns None.
 
-    Sets the `dir` attribute on the top-level `<html>` element (via a small
-    same-origin script, since `st.markdown` cannot mutate elements outside the
-    injected fragment) so both the UA bidi rules and the `html[dir="rtl"]`
-    CSS above apply consistently across reruns and language switches.
+    Uses injected CSS only (no ``st.components`` / ``st.iframe``) so Streamlit
+    Cloud stays compatible after ``components.v1.html`` removal.
     """
     direction = "rtl" if lang == "ar" else "ltr"
-    st.components.v1.html(
+    mirror = """
+      .soft-card { border-left: none !important; border-right: 4px solid var(--color-primary) !important; }
+      div[data-testid="stRadio"] [role="radiogroup"] { flex-direction: row-reverse; }
+    """ if direction == "rtl" else """
+      .soft-card { border-right: none !important; border-left: 4px solid var(--color-primary) !important; }
+    """
+    st.markdown(
         f"""
-        <script>
-            var doc = window.parent.document.documentElement;
-            doc.setAttribute('dir', '{direction}');
-            doc.setAttribute('lang', '{lang}');
-        </script>
+        <style>
+          html, body,
+          [data-testid="stAppViewContainer"],
+          [data-testid="stSidebar"],
+          [data-testid="stSidebarContent"],
+          section.main, .block-container {{
+            direction: {direction};
+          }}
+          {mirror}
+        </style>
         """,
-        height=0,
-        width=0,
+        unsafe_allow_html=True,
     )
 
 
