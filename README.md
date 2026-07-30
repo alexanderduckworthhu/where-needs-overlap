@@ -29,7 +29,7 @@ Current extract (`data/processed/analysis_table.csv`, access date 2026-07-14):
 - **~48.6 million** people in IPC Phase 3+ across countries with a current national estimate
 - **3** dual-pressure countries at or above both focus-set medians for Phase 3+ share and hosted displacement: **Sudan, Ethiopia, Chad**
 - **1** intentional coverage gap: **South Sudan** has no current national IPC Phase 3+ row in this HDX extract
-- **EN / FR / DE / IT / PT / ZH / RU** UI via `src/i18n.py` + `src/locales_extra.py`
+- **EN / FR / DE / IT / PT / ES / AR / ZH / RU** UI via `src/i18n.py` + `src/locales_extra.py`
 
 ## Setup & usage
 

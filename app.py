@@ -25,7 +25,7 @@ from src.i18n import (
     t,
 )
 from src.insights import compute_overlap_insight, format_action_steps, missing_ipc_note
-from src.styles import inject_styles, soft_card
+from src.styles import inject_styles, set_page_direction, soft_card
 
 logger = logging.getLogger(__name__)
 
@@ -85,6 +85,7 @@ lang = st.sidebar.selectbox(
     format_func=lambda code: LANGUAGE_LABELS.get(code, code),
     key="ui_lang",
 )
+set_page_direction(lang)
 st.sidebar.caption(t(lang, "sidebar_hint"))
 st.sidebar.markdown(t(lang, "sidebar_guide"))
 if st.sidebar.button(t(lang, "reset_view"), type="secondary"):

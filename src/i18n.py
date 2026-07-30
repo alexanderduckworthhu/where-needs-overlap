@@ -24,7 +24,7 @@ FOCUS_NAMES_I18N = {
     **locales_extra.FOCUS_NAMES,
 }
 
-LANGUAGE_OPTIONS: tuple[str, ...] = ("en", "fr", "de", "it", "pt", "zh", "ru")
+LANGUAGE_OPTIONS: tuple[str, ...] = ("en", "fr", "de", "it", "pt", "es", "ar", "zh", "ru")
 
 LANGUAGE_LABELS: dict[str, str] = {
     "en": "English",
@@ -32,6 +32,8 @@ LANGUAGE_LABELS: dict[str, str] = {
     "de": "Deutsch",
     "it": "Italiano",
     "pt": "Português",
+    "es": "Español",
+    "ar": "العربية",
     "zh": "中文",
     "ru": "Русский",
 }

@@ -1,4 +1,4 @@
-"""Additional UI locales: German, Italian, Portuguese, Mandarin, Russian."""
+"""Additional UI locales: German, Italian, Portuguese, Spanish, Arabic, Mandarin, Russian."""
 
 from __future__ import annotations
 
@@ -32,6 +32,26 @@ FOCUS_NAMES = {
         "SOM": "Somália",
         "SSD": "Sudão do Sul",
         "SDN": "Sudão",
+    },
+    "es": {
+        "BFA": "Burkina Faso",
+        "TCD": "Chad",
+        "ETH": "Etiopía",
+        "MLI": "Malí",
+        "NER": "Níger",
+        "SOM": "Somalia",
+        "SSD": "Sudán del Sur",
+        "SDN": "Sudán",
+    },
+    "ar": {
+        "BFA": "بوركينا فاسو",
+        "TCD": "تشاد",
+        "ETH": "إثيوبيا",
+        "MLI": "مالي",
+        "NER": "النيجر",
+        "SOM": "الصومال",
+        "SSD": "جنوب السودان",
+        "SDN": "السودان",
     },
     "zh": {
         "BFA": "布基纳法索",
@@ -84,6 +104,24 @@ Dettagli in `docs/methods.md`.
 
 Mais em `docs/methods.md`.
 """,
+    "es": """### Cómo se construyen las cifras
+- **Clave de unión:** códigos ISO3 (nunca unimos por el nombre del país en texto).
+- **IPC:** archivo largo de HDX → se conserva `Validity period == current` y `Phase == 3+`. Las proporciones llegan como 0-1 y se convierten en porcentajes para los gráficos.
+- **Desplazamiento:** API de ACNUR con `coa` + `cf_type=ISO`. Sumamos refugiados + solicitantes de asilo + otras personas de interés **acogidas** en el país. Omitir `coa` devuelve un agregado mundial, un error común al usar la API.
+- **Supervivencia infantil:** OMS GHO `MDG_0000000001`, último año disponible por país focal.
+- **Puntaje compuesto:** una combinación ilustrativa de puntajes z solo para la conversación, no un índice oficial.
+
+Más detalle en `docs/methods.md`.
+""",
+    "ar": """### كيف تُبنى الأرقام
+- **مفتاح الربط:** رموز ISO3 (لا نربط أبداً بأسماء الدول نصياً).
+- **IPC:** ملف HDX الطويل، مع الاحتفاظ بـ `Validity period == current` و `Phase == 3+`. تصل الحصص بصيغة رقمية من 0 إلى 1 وتتحول إلى نسب مئوية في الرسوم البيانية.
+- **النزوح:** واجهة برمجة تطبيقات المفوضية باستخدام `coa` و `cf_type=ISO`. نجمع اللاجئين وطالبي اللجوء وسائر الأشخاص موضع الاهتمام **المستضافين** داخل البلد. حذف `coa` يُرجع مجموعاً عالمياً، وهو خطأ شائع عند استخدام هذه الواجهة.
+- **بقاء الأطفال:** منظمة الصحة العالمية GHO، المؤشر `MDG_0000000001`، أحدث سنة متاحة لكل دولة مستهدفة.
+- **الدرجة المركّبة:** مزيج توضيحي من الدرجات المعيارية z-score لأغراض النقاش فقط، وليست مؤشراً رسمياً.
+
+مزيد من التفاصيل في `docs/methods.md`.
+""",
     "zh": """### 指标如何构建
 - **关联键：** ISO3 代码（绝不用国家全名关联）。
 - **IPC：** HDX 长表 → 保留 `Validity period == current` 且 `Phase == 3+`。份额以 0–1 给出，再转为百分比。
@@ -120,6 +158,16 @@ _SOURCES = {
 - **API de estatísticas populacionais ACNUR**, refugiados, requerentes de asilo e outras pessoas acolhidas
 - **OMS GHO**, mortalidade em menores de 5 anos (`MDG_0000000001`)
 """,
+    "es": """### De dónde vienen los datos
+- **Inseguridad alimentaria aguda IPC** en [HDX](https://data.humdata.org/dataset/global-acute-food-insecurity-country-data)
+- **API de estadísticas de población de ACNUR**, refugiados, solicitantes de asilo y otras personas de interés acogidas
+- **OMS GHO**, mortalidad en menores de 5 años (`MDG_0000000001`)
+""",
+    "ar": """### من أين تأتي البيانات
+- **انعدام الأمن الغذائي الحاد وفق IPC** على [HDX](https://data.humdata.org/dataset/global-acute-food-insecurity-country-data)
+- **واجهة برمجة تطبيقات إحصاءات السكان لدى المفوضية**، اللاجئون المستضافون وطالبو اللجوء وسائر الأشخاص موضع الاهتمام
+- **منظمة الصحة العالمية GHO**، معدل وفيات الأطفال دون الخامسة (`MDG_0000000001`)
+""",
     "zh": """### 数据来源
 - **IPC 急性粮食不安全**：[HDX](https://data.humdata.org/dataset/global-acute-food-insecurity-country-data)
 - **UNHCR 人口统计 API**, 收容国内的难民、寻求庇护者及其他受关切者
@@ -153,6 +201,20 @@ Dettagli in `docs/limitations.md`.
 - **Projeto de portfolio de aprendizagem**, não um produto OCHA / UNICEF / ACNUR
 
 Mais em `docs/limitations.md`.
+""",
+    "es": """### Cuidado y límites
+- Solo agregados públicos, sin ningún intento de identificar comunidades o individuos
+- Los totales nacionales ocultan focos críticos; no dirija ayuda basándose solo en esta página
+- Este es un **proyecto de portafolio de aprendizaje**, no un producto de OCHA / UNICEF / ACNUR
+
+Hoja de límites más detallada: `docs/limitations.md`.
+""",
+    "ar": """### العناية والحدود
+- تُستخدم فقط بيانات مجمّعة وعلنية، دون أي محاولة لتحديد هوية مجتمعات أو أفراد
+- الإجماليات الوطنية تُخفي البؤر الساخنة، فلا تُوجَّه المساعدات استناداً إلى هذه الصفحة وحدها
+- هذا **مشروع حافظة تعليمية**، وليس منتجاً تابعاً لمكتب تنسيق الشؤون الإنسانية أو اليونيسف أو المفوضية
+
+ورقة أكثر تفصيلاً حول الحدود: `docs/limitations.md`.
 """,
     "zh": """### 审慎与边界
 - 仅使用公开汇总数据, 不识别社区或个人
@@ -711,6 +773,263 @@ COPY = {
         sources_md=_SOURCES["pt"],
         ethics_md=_ETHICS["pt"],
     ),
+    "es": _pack(
+        lang_label="Idioma",
+        sidebar_hint="Cambie de idioma en cualquier momento. Toda la página se actualiza.",
+        sidebar_guide="Empiece por **Historia**, es la conclusión principal. Mapa y País son acercamientos opcionales.",
+        reset_view="Volver a Historia",
+        status_ready="Tabla de análisis cargada",
+        load_error="No se pudo abrir la tabla de análisis: {detail}. Vuelva a ejecutar `python -m src.run_pipeline` y luego actualice.",
+        kpi_ipc_help="Personas en fase IPC 3+ (Crisis o peor) en los ocho países focales con una estimación nacional vigente.",
+        kpi_disp_help="Refugiados + solicitantes de asilo + otras personas de interés acogidas en el país de asilo (ACNUR).",
+        kpi_u5_help="Mediana de la OMS de mortalidad en menores de 5 años (muertes por 1.000 nacidos vivos) en el conjunto focal.",
+        eyebrow="Portafolio de datos humanitarios",
+        title="Donde las necesidades se superponen",
+        why=(
+            "El hambre, el desplazamiento y el riesgo para la supervivencia infantil rara vez aparecen solos. "
+            "Este panel muestra dónde estas presiones se acumulan, para que las prioridades sigan a las "
+            "personas, no a los compartimentos institucionales."
+        ),
+        def_expander="Cómo contamos el desplazamiento (lectura rápida)",
+        def_title="Definición que fijamos",
+        def_body=(
+            "Personas **acogidas** en el país de asilo: refugiados + solicitantes de asilo + "
+            "otras personas de interés (ACNUR). Dejamos fuera a propósito los recuentos por país de "
+            "origen, mezclarlos hace que los gráficos parezcan más elegantes y las respuestas más confusas."
+        ),
+        kpi_ipc="En fase IPC 3+ (países focales)",
+        kpi_disp="Personas desplazadas acogidas",
+        kpi_u5="Mediana de mortalidad en menores de 5 años",
+        nav_label="¿Dónde quiere mirar?",
+        nav_story="Historia",
+        nav_map="Mapa",
+        nav_country="Un país",
+        nav_about="Detrás de las cifras",
+        insight_title="En palabras simples",
+        action_heading="Qué mirar a continuación",
+        action_dual_pressure=(
+            "**{countries}** están en niveles altos tanto en severidad del hambre como en desplazamiento "
+            "acogido, compare los planes de seguridad alimentaria y protección antes de decidir dónde actuar primero."
+        ),
+        action_missing_ipc=(
+            "**{countries}**: no hay una estimación nacional vigente de IPC Fase 3+ en esta tabla, "
+            "trate una celda vacía del mapa como desconocida, no como riesgo bajo."
+        ),
+        action_single_axis=(
+            "Los países urgentes en una sola dimensión (vea el contraste arriba) igual merecen una "
+            "mirada específica, no solo el conjunto de doble presión."
+        ),
+        country_select="Elija un país",
+        trends_title="Cómo ha evolucionado la situación",
+        trends_intro="El mismo país, con un poco más de contexto en el tiempo, desplazamiento acogido y mortalidad infantil.",
+        footer="Un portafolio de aprendizaje para roles de datos humanitarios · No apto para decisiones operativas",
+        demo_note="Vea el recorrido de 90 segundos",
+        demo_watch="Abrir demo",
+        access_dates="Datos extraídos el",
+        access_dates_hint=",  las fuentes están en Detrás de las cifras",
+        loading="Preparando la última tabla…, un momento.",
+        no_data=(
+            "Todavía no hay tabla de análisis, ejecute un pipeline limpio y luego actualice.\n\n"
+            "Desde la carpeta del proyecto:\n\n```bash\npython -m src.run_pipeline\n```\n\nLuego actualice esta página."
+        ),
+        map_takeaway=(
+            "Más oscuro = una proporción mayor de personas en fase IPC 3+ (Crisis o peor). "
+            "Trate esto como un telón de fondo de severidad antes de pasar a la vista de Historia."
+        ),
+        trends_caption=(
+            "Estas líneas provienen del historial de acogida de ACNUR y de la mortalidad en menores de 5 "
+            "años de la OMS. Las evaluaciones IPC no llegan en un calendario mensual ordenado, así que no "
+            "simulamos una tendencia de hambre uniforme."
+        ),
+        about_intro="Para quienes quieren ver el funcionamiento interno: métodos, glosario, fuentes y límites.",
+        glossary_heading="### Palabras que usamos a propósito",
+        access_date_label="Extraídos el",
+        chart_map_title="Inseguridad alimentaria aguda (IPC Fase 3+) en países focales",
+        chart_map_pct="IPC Fase 3+ (%)",
+        chart_map_people="Personas en Fase 3+",
+        chart_map_disp="Desplazados (acogidos)",
+        chart_map_u5="Mortalidad en menores de 5 años",
+        chart_map_colorbar="% en Fase 3+",
+        chart_scatter_title="Dónde coinciden el desplazamiento y el hambre",
+        chart_scatter_x="Personas desplazadas acogidas (ACNUR)",
+        chart_scatter_y="Población en fase IPC 3+ (%)",
+        chart_scatter_u5="Mortalidad en menores de 5 años (por 1000)",
+        chart_drill_p1="Personas en fase IPC 3+",
+        chart_drill_p2="Desplazados acogidos",
+        chart_drill_p3="Mortalidad en menores de 5 años frente a la mediana focal",
+        chart_drill_bar_ipc="Fase 3+",
+        chart_drill_bar_disp="Desplazados",
+        chart_drill_median="Mediana focal",
+        chart_drill_title="{country} de un vistazo",
+        chart_no_data="Todavía no hay nada para {iso3}",
+        chart_trends_p1="Desplazamiento acogido (ACNUR)",
+        chart_trends_p2="Mortalidad en menores de 5 años (OMS)",
+        chart_trends_series_disp="Desplazados acogidos",
+        chart_trends_series_u5="TMM5",
+        chart_trends_title="{country} en los últimos años",
+        country_gap=(
+            "No encontramos una estimación nacional vigente de IPC Fase 3+ para {country} en este extracto. "
+            "Eso no significa que no haya hambre, solo que este fragmento de datos públicos está en silencio. "
+            "Lea el desplazamiento y la mortalidad infantil teniendo en cuenta este vacío."
+        ),
+        country_snapshot=(
+            "En {country}, cerca del **{pct}%** de la población evaluada está en fase 3+, "
+            "con **{displaced}** personas desplazadas acogidas y una mortalidad en menores de 5 años "
+            "de alrededor de **{u5mr}** por 1.000 nacidos vivos."
+        ),
+        insight_headline=(
+            "Mayor doble presión: {names} se sitúan en o por encima de las medianas del conjunto focal "
+            "tanto en la proporción de IPC Fase 3+ ({ipc_pct}%) como en el desplazamiento acogido "
+            "({displaced} personas)."
+        ),
+        insight_headline_empty="Ningún país se sitúa por encima de ambas medianas en el extracto actual.",
+        insight_contrast=(
+            " Nota: {country} tiene una Fase 3+ alta ({ipc_pct}%) pero un desplazamiento acogido más bajo, "
+            "el hambre y la acogida de asilo son señales distintas."
+        ),
+        insight_gap=(
+            " Vacío: {names} {verb} un registro nacional vigente de IPC Fase 3+ aquí, "
+            "dato faltante, no necesidad nula."
+        ),
+        insight_body_lead=(
+            "Para los equipos de programa: comiencen por el conjunto de doble presión, luego discutan "
+            "juntos seguridad alimentaria y protección."
+        ),
+        map_gap_note=(
+            "**La ausencia de IPC en el mapa es intencional.** {names} {verb} un registro nacional "
+            "*vigente* en fase 3+ en este extracto. Eso es un vacío de cobertura, no una prueba de que "
+            "el hambre esté ausente."
+        ),
+        methods_md=_METHODS["es"],
+        sources_md=_SOURCES["es"],
+        ethics_md=_ETHICS["es"],
+    ),
+    "ar": _pack(
+        lang_label="اللغة",
+        sidebar_hint="يمكنك تغيير اللغة في أي وقت، وستتحدث الصفحة بأكملها تبعاً لذلك.",
+        sidebar_guide="ابدأ بقسم **القصة**، فهو الخلاصة الرئيسية. الخريطة والدولة تكبيران اختياريان.",
+        reset_view="العودة إلى القصة",
+        status_ready="تم تحميل جدول التحليل",
+        load_error="تعذر فتح جدول التحليل: {detail}. أعد تشغيل `python -m src.run_pipeline` ثم حدّث الصفحة.",
+        kpi_ipc_help="الأشخاص في المرحلة 3 فأعلى من التصنيف المرحلي المتكامل للأمن الغذائي (IPC)، أزمة أو أسوأ، في الدول الثماني المستهدفة ممن لديهم تقدير وطني حالي.",
+        kpi_disp_help="اللاجئون وطالبو اللجوء وسائر الأشخاص موضع الاهتمام المستضافون في بلد اللجوء (المفوضية السامية لشؤون اللاجئين).",
+        kpi_u5_help="وسيط منظمة الصحة العالمية لمعدل وفيات الأطفال دون سن الخامسة (لكل 1000 ولادة حية) في المجموعة المستهدفة.",
+        eyebrow="حافظة بيانات إنسانية",
+        title="حيث تتقاطع الاحتياجات",
+        why=(
+            "نادراً ما يظهر الجوع والنزوح ومخاطر بقاء الأطفال منفردين. "
+            "تُظهر هذه اللوحة أين تتراكم هذه الضغوط، لتتبع الأولويات الأشخاص لا القطاعات المنعزلة."
+        ),
+        def_expander="كيف نحتسب النزوح (قراءة سريعة)",
+        def_title="التعريف الذي اعتمدناه",
+        def_body=(
+            "الأشخاص **المستضافون** في بلد اللجوء: اللاجئون + طالبو اللجوء + الأشخاص الآخرون موضع "
+            "الاهتمام (المفوضية). نستبعد عمداً الأعداد المصنّفة حسب بلد المنشأ، فخلطها يجعل الرسوم "
+            "البيانية تبدو أذكى والإجابات أكثر ضبابية."
+        ),
+        kpi_ipc="في المرحلة 3 فأعلى من IPC (الدول المستهدفة)",
+        kpi_disp="النازحون المستضافون",
+        kpi_u5="وسيط وفيات الأطفال دون الخامسة",
+        nav_label="أين تريد أن تنظر؟",
+        nav_story="القصة",
+        nav_map="الخريطة",
+        nav_country="دولة واحدة",
+        nav_about="خلف الأرقام",
+        insight_title="بعبارات بسيطة",
+        action_heading="ما الذي يستحق النظر إليه لاحقاً",
+        action_dual_pressure=(
+            "تحتل **{countries}** مرتبة عالية في كل من شدة الجوع والنزوح المستضاف، "
+            "فقارن خطط الأمن الغذائي والحماية قبل تحديد أولوية العمل."
+        ),
+        action_missing_ipc=(
+            "**{countries}**: لا يوجد تقدير وطني حالي لمرحلة IPC 3 فأعلى في هذا الجدول، "
+            "وينبغي التعامل مع خانة الخريطة الفارغة على أنها غير معروفة لا منخفضة الخطورة."
+        ),
+        action_single_axis=(
+            "الدول الملحة على بُعد واحد فقط (انظر التباين أعلاه) ما تزال تستحق نظرة مخصصة، "
+            "لا مجموعة الضغط المزدوج وحدها."
+        ),
+        country_select="اختر دولة",
+        trends_title="كيف تطورت الأوضاع",
+        trends_intro="الدولة نفسها، مع سياق زمني أطول قليلاً، للنزوح المستضاف ووفيات الأطفال.",
+        footer="حافظة تعلّم لأدوار بيانات العمل الإنساني · غير مخصصة لاتخاذ قرارات تشغيلية",
+        demo_note="شاهد الجولة التوضيحية التي تستغرق 90 ثانية",
+        demo_watch="فتح العرض التوضيحي",
+        access_dates="تاريخ سحب البيانات",
+        access_dates_hint="،  والمصادر متاحة ضمن خلف الأرقام",
+        loading="جارٍ تجميع أحدث جدول… لحظات من فضلك.",
+        no_data=(
+            "لا يوجد جدول تحليل بعد، شغّل خط معالجة نظيفاً ثم حدّث الصفحة.\n\n"
+            "من داخل مجلد المشروع:\n\n```bash\npython -m src.run_pipeline\n```\n\nثم حدّث هذه الصفحة."
+        ),
+        map_takeaway=(
+            "كلما ازداد التدرج اللوني غموقاً، ارتفعت نسبة السكان في المرحلة 3 فأعلى من IPC "
+            "(أزمة أو أسوأ). اعتبر هذه الخريطة خلفية لشدة الوضع قبل الانتقال إلى عرض القصة."
+        ),
+        trends_caption=(
+            "تأتي هذه الخطوط من سجل استضافة المفوضية ومعدل وفيات الأطفال دون الخامسة لمنظمة الصحة "
+            "العالمية. تقييمات IPC لا تصدر وفق تقويم شهري منتظم، لذلك لا نصطنع اتجاهاً سلساً للجوع."
+        ),
+        about_intro="لمن يرغب في الاطلاع على التفاصيل: المنهجية والمسرد والمصادر والحدود.",
+        glossary_heading="### مصطلحات اخترناها عمداً",
+        access_date_label="تاريخ السحب",
+        chart_map_title="انعدام الأمن الغذائي الحاد (IPC المرحلة 3 فأعلى) في الدول المستهدفة",
+        chart_map_pct="IPC المرحلة 3 فأعلى (%)",
+        chart_map_people="الأشخاص في المرحلة 3 فأعلى",
+        chart_map_disp="النازحون (المستضافون)",
+        chart_map_u5="وفيات الأطفال دون الخامسة",
+        chart_map_colorbar="% في المرحلة 3 فأعلى",
+        chart_scatter_title="أين يلتقي النزوح بالجوع",
+        chart_scatter_x="النازحون المستضافون (المفوضية)",
+        chart_scatter_y="السكان في مرحلة IPC 3 فأعلى (%)",
+        chart_scatter_u5="وفيات الأطفال دون الخامسة (لكل 1000)",
+        chart_drill_p1="الأشخاص في مرحلة IPC 3 فأعلى",
+        chart_drill_p2="النازحون المستضافون",
+        chart_drill_p3="وفيات الأطفال دون الخامسة مقابل الوسيط المستهدف",
+        chart_drill_bar_ipc="المرحلة 3 فأعلى",
+        chart_drill_bar_disp="النازحون",
+        chart_drill_median="الوسيط المستهدف",
+        chart_drill_title="{country} في لمحة",
+        chart_no_data="لا توجد بيانات بعد لـ {iso3}",
+        chart_trends_p1="النزوح المستضاف (المفوضية)",
+        chart_trends_p2="وفيات الأطفال دون الخامسة (منظمة الصحة العالمية)",
+        chart_trends_series_disp="النازحون المستضافون",
+        chart_trends_series_u5="معدل وفيات الأطفال دون الخامسة",
+        chart_trends_title="{country} خلال السنوات الأخيرة",
+        country_gap=(
+            "لم نعثر على تقدير وطني حالي لمرحلة IPC 3 فأعلى لدولة {country} في هذا المقتطف. "
+            "هذا لا يعني غياب الجوع، بل يعني فقط أن هذا الجزء من البيانات العلنية صامت. اقرأ بيانات "
+            "النزوح ووفيات الأطفال مع أخذ هذه الفجوة في الحسبان."
+        ),
+        country_snapshot=(
+            "في {country}، نحو **{pct}%** من السكان الذين جرى تقييمهم يقعون في المرحلة 3 فأعلى، "
+            "مع **{displaced}** من النازحين المستضافين، ومعدل وفيات للأطفال دون الخامسة يقارب "
+            "**{u5mr}** لكل 1000 ولادة حية."
+        ),
+        insight_headline=(
+            "أعلى ضغط مزدوج: تقف {names} عند وسيط المجموعة المستهدفة أو فوقه في كل من حصة مرحلة "
+            "IPC 3 فأعلى ({ipc_pct}%) والنزوح المستضاف ({displaced} شخصاً)."
+        ),
+        insight_headline_empty="لا توجد دولة تقف فوق الوسيطين معاً في المقتطف الحالي.",
+        insight_contrast=(
+            " ملاحظة: تسجل {country} مرحلة 3 فأعلى مرتفعة ({ipc_pct}%) لكن بنزوح مستضاف أقل، "
+            "فالجوع واستضافة اللجوء إشارتان مختلفتان."
+        ),
+        insight_gap=(
+            " فجوة: {verb} {names} تقديراً وطنياً حالياً لمرحلة IPC 3 فأعلى هنا، "
+            "وهذه بيانات مفقودة لا احتياج معدوم."
+        ),
+        insight_body_lead=(
+            "لفرق البرامج: ابدأوا بمجموعة الضغط المزدوج، ثم ناقشوا الأمن الغذائي والحماية معاً."
+        ),
+        map_gap_note=(
+            "**غياب بيانات IPC عن الخريطة أمر مقصود.** {verb} {names} صفاً وطنياً *حالياً* لمرحلة "
+            "3 فأعلى في هذا المقتطف. هذه فجوة تغطية لا دليل على غياب الجوع."
+        ),
+        methods_md=_METHODS["ar"],
+        sources_md=_SOURCES["ar"],
+        ethics_md=_ETHICS["ar"],
+    ),
     "zh": _pack(
         lang_label="语言",
         sidebar_hint="可随时切换语言，整页内容会同步更新。",
@@ -987,6 +1306,22 @@ GLOSSARY = {
         ("U5MR", "Mortalidade em menores de cinco anos (por 1.000 nados-vivos), OMS GHO."),
         ("ISO3", "Códigos de país de três letras para junções."),
     ],
+    "es": [
+        ("IPC Fase 3+", "Clasificación Integrada de Fases de Seguridad Alimentaria. Crisis o peor."),
+        ("País de asilo / acogida", "Personas acogidas en ese país (enfoque usado aquí)."),
+        ("País de origen", "De dónde huyeron las personas desplazadas (no se usa aquí)."),
+        ("PoC", "Personas de interés para ACNUR (categoría más amplia; aquí usamos REF+ASY+OOC)."),
+        ("TMM5", "Tasa de mortalidad en menores de 5 años (muertes por 1.000 nacidos vivos), OMS GHO."),
+        ("ISO3", "Códigos de país de tres letras usados para unir todas las fuentes de forma segura."),
+    ],
+    "ar": [
+        ("مرحلة IPC 3 فأعلى", "التصنيف المرحلي المتكامل للأمن الغذائي. أزمة أو أسوأ."),
+        ("بلد اللجوء / الاستضافة", "الأشخاص المستضافون في ذلك البلد (النهج المعتمد هنا)."),
+        ("بلد المنشأ", "البلد الذي فرّ منه الأشخاص النازحون (غير مستخدم هنا)."),
+        ("الأشخاص موضع الاهتمام (PoC)", "الأشخاص الذين تُعنى بهم المفوضية (فئة أوسع؛ نستخدم هنا اللاجئين وطالبي اللجوء وسائر الأشخاص موضع الاهتمام)."),
+        ("معدل وفيات الأطفال دون الخامسة", "عدد الوفيات لكل 1000 ولادة حية، منظمة الصحة العالمية GHO."),
+        ("ISO3", "رموز الدول المكوّنة من ثلاثة أحرف، تُستخدم لربط جميع المصادر بأمان."),
+    ],
     "zh": [
         ("IPC 第 3+ 阶段", "综合粮食安全阶段分类, 危机或更差。"),
         ("庇护国 / 收容", "在该国被收容的人口。"),
@@ -1010,6 +1345,10 @@ GAP_VERBS = {
     "de": ("hat", "haben"),
     "it": ("non ha", "non hanno"),
     "pt": ("não tem", "não têm"),
+    "es": ("no tiene", "no tienen"),
+    # Arabic uses the invariant "لا يوجد لدى" (there isn't, with X) construction so the
+    # verb doesn't need to agree in gender/number with the list of country names.
+    "ar": ("لا يوجد لدى", "لا يوجد لدى"),
     "zh": ("在", "在"),  # Chinese templates embed grammar differently; see insights
     "ru": ("нет", "нет"),
 }

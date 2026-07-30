@@ -163,12 +163,62 @@ div[data-testid="stPlotlyChart"] {{
 a, button {{
   outline-offset: 2px;
 }}
+
+/* Minimal RTL support (Arabic). Scoped to html[dir="rtl"] so LTR languages are untouched. */
+html[dir="rtl"] body,
+html[dir="rtl"] [class*="css"] {{
+  direction: rtl;
+}}
+html[dir="rtl"] .block-container {{
+  text-align: right;
+}}
+html[dir="rtl"] div[data-testid="stSidebar"] {{
+  text-align: right;
+}}
+html[dir="rtl"] .soft-card {{
+  border-left: none;
+  border-right: 4px solid var(--color-primary);
+}}
+html[dir="rtl"] div[data-testid="stRadio"] [role="radiogroup"] {{
+  flex-direction: row-reverse;
+}}
+html[dir="rtl"] div[data-testid="stMetric"],
+html[dir="rtl"] div[data-testid="stExpander"] {{
+  text-align: right;
+}}
+html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .hero-why,
+html[dir="rtl"] .footer-note {{
+  text-align: right;
+}}
 """
 
 
 def inject_styles() -> None:
     """Inject design-token CSS into the Streamlit page. Returns None."""
     st.markdown(f"<style>{CSS}</style>", unsafe_allow_html=True)
+
+
+def set_page_direction(lang: str) -> None:
+    """Flip the page to RTL for Arabic, LTR otherwise. Returns None.
+
+    Sets the `dir` attribute on the top-level `<html>` element (via a small
+    same-origin script, since `st.markdown` cannot mutate elements outside the
+    injected fragment) so both the UA bidi rules and the `html[dir="rtl"]`
+    CSS above apply consistently across reruns and language switches.
+    """
+    direction = "rtl" if lang == "ar" else "ltr"
+    st.components.v1.html(
+        f"""
+        <script>
+            var doc = window.parent.document.documentElement;
+            doc.setAttribute('dir', '{direction}');
+            doc.setAttribute('lang', '{lang}');
+        </script>
+        """,
+        height=0,
+        width=0,
+    )
 
 
 def soft_card(html_body: str) -> None:
