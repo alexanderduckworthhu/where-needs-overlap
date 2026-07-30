@@ -16,7 +16,7 @@ Question the whole app answers:
    and child mortality risk show up together?"
 
 If a feature does not help answer that question, it does not belong.
-That single filter is how you stop INFJ overbuilding.
+That single filter is how you stop scope creep.
 
 
 --------------------------------------------------------------------------------
@@ -122,7 +122,7 @@ Step C. Trace one number (ETH Phase 3+%):
 
 Step D. Explain aloud (no notes):
   "I joined three sources on ISO3, locked displacement as hosted REF+ASY+OOC,
-   and designed the UI around where needs compound, with EN/FR glossary for Geneva."
+   and designed the UI around where needs compound, with EN/FR glossary for humanitarian audiences."
 
 
 --------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ Navigation: horizontal radio (Story | Map | One country | Behind the numbers)
 
 
 --------------------------------------------------------------------------------
-7. INFJ OVERTHINK TRAPS → CODE COUNTERMEASURES
+7. OVERTHINK TRAPS → CODE COUNTERMEASURES
 --------------------------------------------------------------------------------
 Trap: "Maybe I should add climate / FTS first"
 Fix:  docs/backlog.md only; deploy before new sources (docs/deploy.md)

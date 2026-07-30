@@ -1,6 +1,6 @@
 # Where Needs Overlap
 
-A country-level dashboard that shows where acute food insecurity, hosted displacement, and under-5 mortality coincide, built for IM and programme analysts working with UNICEF, UNHCR, and OCHA counterparts in Geneva.
+A country-level dashboard that shows where acute food insecurity, hosted displacement, and under-5 mortality coincide, built for IM and programme analysts working with UNICEF, UNHCR, and OCHA counterparts.
 
 | | |
 |---|---|
@@ -11,7 +11,7 @@ A country-level dashboard that shows where acute food insecurity, hosted displac
 
 ## Why it exists
 
-Food security, displacement, and child survival are still often viewed in separate tools. That split hides **compounded** pressure: a high IPC Phase 3+ share in a country that also hosts large displaced populations signals a different coordination problem than either metric alone. Public HDX, UNHCR, and WHO sources already carry the pieces; this project joins them on ISO3 and frames one decision question for Geneva audiences.
+Food security, displacement, and child survival are still often viewed in separate tools. That split hides **compounded** pressure: a high IPC Phase 3+ share in a country that also hosts large displaced populations signals a different coordination problem than either metric alone. Public HDX, UNHCR, and WHO sources already carry the pieces; this project joins them on ISO3 and frames one decision question for humanitarian programme audiences.
 
 ## Technical decisions
 
@@ -19,7 +19,7 @@ Food security, displacement, and child survival are still often viewed in separa
 - **IPC via HDX (national long) over subnational IPC**, national Phase 3+ is the honest scope for an eight-country join; subnational maps need different QA and would inflate scope without changing the core narrative.
 - **UNHCR hosted (CoA) counts over origin-based totals**, origin and asylum answer different questions; locking CoA keeps the Story chart interpretable.
 - **WHO GHO under-5 mortality as context, not a real-time pulse**, structural child-survival risk that UNICEF stakeholders recognize; lagged by design.
-- **No ML / forecasting**, avoiding unverifiable crisis prediction claims that would undermine trust in an IO interview.
+- **No ML / forecasting**, avoiding unverifiable crisis prediction claims that would undermine trust in a stakeholder review.
 
 ## Results & metrics
 
