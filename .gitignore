@@ -14,3 +14,6 @@ data/processed/*
 !data/processed/.gitkeep
 !data/processed/analysis_table.csv
 !data/processed/metadata.json
+
+# Local reverse-engineering notes (not for public repos)
+REVERSE_ENGINEERING*
