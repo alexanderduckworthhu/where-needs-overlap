@@ -197,17 +197,24 @@ elif nav == "country":
 
     st.markdown(f"#### {t(lang, 'trends_title')}")
     st.caption(t(lang, "trends_intro"))
-    st.plotly_chart(
-        country_trends(
-            displacement_history,
-            u5mr_history,
-            selected_iso,
-            localized_name,
-            lang=lang,
-        ),
-        width="stretch",
+    has_trend_data = (
+        (displacement_history is not None and not displacement_history.empty)
+        or (u5mr_history is not None and not u5mr_history.empty)
     )
-    st.caption(t(lang, "trends_caption"))
+    if not has_trend_data:
+        st.info(t(lang, "chart_no_data", iso3=selected_iso))
+    else:
+        st.plotly_chart(
+            country_trends(
+                displacement_history,
+                u5mr_history,
+                selected_iso,
+                localized_name,
+                lang=lang,
+            ),
+            width="stretch",
+        )
+        st.caption(t(lang, "trends_caption"))
 
 else:
     st.markdown(t(lang, "about_intro"))

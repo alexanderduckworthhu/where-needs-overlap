@@ -4,8 +4,9 @@ Goal: a stranger can open a URL and understand the overlap story in under two mi
 
 ## Streamlit Community Cloud
 
-1. Create a GitHub repo and push this project (include `data/processed/analysis_table.csv`
-   and `metadata.json` so the demo works without live API calls on first load).
+1. Create a GitHub repo and push this project (include `data/processed/analysis_table.csv`,
+   `metadata.json`, and the two Country-view history files under `data/raw/` so trends
+   work without live API calls on first load).
 2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
 3. Main file path: `app.py`
 4. Python version: 3.11+ recommended.
@@ -15,8 +16,10 @@ Goal: a stranger can open a URL and understand the overlap story in under two mi
 
 - Live fetches from HDX/UNHCR/WHO can be slow or rate-limited on Cloud.
   Committing the processed table keeps the portfolio reliable.
+- Country trends need `data/raw/unhcr_displacement_history.csv` and
+  `data/raw/who_u5mr_focus_history.csv` (small files; other raw downloads stay gitignored).
 - Refresh workflow: run `python -m src.run_pipeline` locally → commit updated
-  `analysis_table.csv` + `metadata.json` → push.
+  `analysis_table.csv`, `metadata.json`, and the two history CSVs → push.
 
 ## 90-second demo video
 

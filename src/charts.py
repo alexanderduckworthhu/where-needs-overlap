@@ -182,6 +182,7 @@ def country_trends(
         rows=1,
         cols=2,
         subplot_titles=(labels["chart_trends_p1"], labels["chart_trends_p2"]),
+        horizontal_spacing=0.12,
     )
 
     if displacement_history is not None and not displacement_history.empty:
@@ -191,15 +192,18 @@ def country_trends(
         if not displacement_series.empty:
             figure.add_trace(
                 go.Scatter(
-                    x=displacement_series["year"],
-                    y=displacement_series["displaced"],
+                    x=pd.to_numeric(displacement_series["year"], errors="coerce"),
+                    y=pd.to_numeric(displacement_series["displaced"], errors="coerce"),
                     mode="lines+markers",
                     line=dict(
                         color=COLOR_PRIMARY,
+                        width=2.5,
                         shape="spline",
                         smoothing=LINE_SMOOTHING,
                     ),
+                    marker=dict(size=7, color=COLOR_PRIMARY),
                     name=labels["chart_trends_series_disp"],
+                    hovertemplate="%{x}<br>%{y:,.0f}<extra></extra>",
                 ),
                 row=1,
                 col=1,
@@ -212,19 +216,33 @@ def country_trends(
             u5mr_series = u5mr_series[u5mr_series["year"] >= earliest_year]
             figure.add_trace(
                 go.Scatter(
-                    x=u5mr_series["year"],
-                    y=u5mr_series["u5mr"],
+                    x=pd.to_numeric(u5mr_series["year"], errors="coerce"),
+                    y=pd.to_numeric(u5mr_series["u5mr"], errors="coerce"),
                     mode="lines+markers",
                     line=dict(
                         color=COLOR_SERIES_WARM,
+                        width=2.5,
                         shape="spline",
                         smoothing=LINE_SMOOTHING,
                     ),
+                    marker=dict(size=7, color=COLOR_SERIES_WARM),
                     name=labels["chart_trends_series_u5"],
+                    hovertemplate="%{x}<br>%{y:.1f}<extra></extra>",
                 ),
                 row=1,
                 col=2,
             )
+
+    if len(figure.data) == 0:
+        figure.add_annotation(
+            text=labels["chart_no_data"].format(iso3=iso3),
+            xref="paper",
+            yref="paper",
+            x=0.5,
+            y=0.5,
+            showarrow=False,
+            font=dict(size=14, color=COLOR_MUTED),
+        )
 
     figure.update_layout(
         title_text=labels["chart_trends_title"].format(country=country_label),
@@ -232,7 +250,10 @@ def country_trends(
         margin=dict(l=10, r=10, t=80, b=10),
         height=CHART_HEIGHT_TRENDS_PX,
         paper_bgcolor="rgba(0,0,0,0)",
-        transition_duration=MOTION_MS,
+        plot_bgcolor="rgba(255,255,255,0.55)",
         font_family="IBM Plex Sans",
+        font_color=COLOR_MUTED,
     )
+    figure.update_xaxes(showgrid=False, zeroline=False)
+    figure.update_yaxes(showgrid=True, gridcolor="rgba(20,33,43,0.08)", zeroline=False)
     return figure

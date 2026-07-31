@@ -10,6 +10,9 @@ __pycache__/
 # Keep folder structure; ignore bulky raw downloads
 data/raw/*
 !data/raw/.gitkeep
+# Small focus-country histories needed for the Country trends chart on Streamlit Cloud
+!data/raw/unhcr_displacement_history.csv
+!data/raw/who_u5mr_focus_history.csv
 data/processed/*
 !data/processed/.gitkeep
 !data/processed/analysis_table.csv
