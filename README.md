@@ -5,7 +5,6 @@ A country-level dashboard that shows where acute food insecurity, hosted displac
 | | |
 |---|---|
 | **Live app** | Set `LIVE_APP_URL` in `src/config.py` after Streamlit Cloud deploy (`docs/deploy.md`) |
-| **Demo (90 sec)** | Set `DEMO_VIDEO_URL` in `src/config.py` |
 | **Status** | Portfolio learning project, not an operational product |
 | **Data access date** | `2026-07-14` (see `data/processed/metadata.json`) |
 
@@ -75,4 +74,10 @@ Joins use **ISO3** only. All figures are **national public aggregates**, no indi
 
 ## About me
 
-_Add 1–2 sentences on motivation for humanitarian data work + LinkedIn/CV URL._
+I'm Alexander Duckworth-Hu, a data scientist building
+decision-support tools for humanitarian, clinical, and
+sustainable finance audiences — with a focus on tools
+that let analysts interrogate the number, not just read it.
+
+🔗 alexanderduckworthhu.github.io
+🔗 linkedin.com/in/alexander-duckworth
