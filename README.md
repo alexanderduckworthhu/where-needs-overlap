@@ -4,6 +4,7 @@ A country-level dashboard that shows where acute food insecurity, hosted displac
 
 | | |
 |---|---|
+| **Project page** | https://alexanderduckworthhu.github.io/where-needs-overlap/ |
 | **Live app** | https://where-needs-overlap.streamlit.app/ |
 | **Status** | Portfolio learning project, not an operational product |
 | **Data access date** | `2026-07-14` (see `data/processed/metadata.json`) |
